@@ -1,0 +1,88 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Python virtual environments
+venv/
+env/
+.env/
+.venv/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Testing
+/coverage
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Production
+/build
+/dist
+/out
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# AI model files
+*.h5
+*.pkl
+*.joblib
+*.model
+*.pt
+*.pth
+*.onnx
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Temporary files
+tmp/
+temp/
+
+# Generated files
+src/frontend/admin-portal/build/
+src/frontend/guest-app/build/
+src/backend/dist/
+
+# Documentation build
+/docs/_build/
+/docs/site/
+
+# Jupyter Notebooks
+.ipynb_checkpoints

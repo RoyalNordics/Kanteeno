@@ -1,0 +1,67 @@
+{
+  "name": "kanteeno",
+  "version": "1.0.0",
+  "description": "Digital platform for optimizing canteen operations and food management",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:backend\" \"npm run start:admin\" \"npm run start:guest\"",
+    "start:backend": "cd src/backend && npm run dev",
+    "start:admin": "cd src/frontend/admin-portal && npm start",
+    "start:guest": "cd src/frontend/guest-app && npm start",
+    "install:all": "npm install && npm run install:backend && npm run install:admin && npm run install:guest",
+    "install:backend": "cd src/backend && npm install",
+    "install:admin": "cd src/frontend/admin-portal && npm install",
+    "install:guest": "cd src/frontend/guest-app && npm install",
+    "build": "npm run build:backend && npm run build:admin && npm run build:guest",
+    "build:backend": "cd src/backend && npm run build",
+    "build:admin": "cd src/frontend/admin-portal && npm run build",
+    "build:guest": "cd src/frontend/guest-app && npm run build",
+    "test": "npm run test:backend && npm run test:admin && npm run test:guest",
+    "test:backend": "cd src/backend && npm test",
+    "test:admin": "cd src/frontend/admin-portal && npm test",
+    "test:guest": "cd src/frontend/guest-app && npm test",
+    "lint": "npm run lint:backend && npm run lint:admin && npm run lint:guest",
+    "lint:backend": "cd src/backend && npm run lint",
+    "lint:admin": "cd src/frontend/admin-portal && npm run lint",
+    "lint:guest": "cd src/frontend/guest-app && npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/kanteeno.git"
+  },
+  "keywords": [
+    "canteen",
+    "food-management",
+    "sustainability",
+    "marketplace",
+    "menu-planning",
+    "ai",
+    "forecasting"
+  ],
+  "author": "Your Organization",
+  "license": "UNLICENSED",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/your-org/kanteeno/issues"
+  },
+  "homepage": "https://github.com/your-org/kanteeno#readme",
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
+  }
+}

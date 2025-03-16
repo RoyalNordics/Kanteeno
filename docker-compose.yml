@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  # MongoDB database
+  mongodb:
+    image: mongo:6.0
+    container_name: kanteeno-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    networks:
+      - kanteeno-network
+
+  # Backend API service
+  backend:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    container_name: kanteeno-backend
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/kanteeno?authSource=admin
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRE=30d
+    volumes:
+      - ./src/backend:/app
+      - /app/node_modules
+    networks:
+      - kanteeno-network
+
+  # Admin portal frontend
+  admin-portal:
+    build:
+      context: ./src/frontend/admin-portal
+      dockerfile: Dockerfile
+    container_name: kanteeno-admin
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - kanteeno-network
+
+  # Guest app frontend
+  guest-app:
+    build:
+      context: ./src/frontend/guest-app
+      dockerfile: Dockerfile
+    container_name: kanteeno-guest
+    restart: always
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+    networks:
+      - kanteeno-network
+
+  # AI forecasting service
+  ai-forecasting:
+    build:
+      context: ./src/ai/forecasting
+      dockerfile: Dockerfile
+    container_name: kanteeno-ai
+    restart: always
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongodb
+      - backend
+    environment:
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/kanteeno?authSource=admin
+      - API_URL=http://backend:5000
+    volumes:
+      - ./src/ai/forecasting:/app
+      - ai_models:/app/models
+    networks:
+      - kanteeno-network
+
+networks:
+  kanteeno-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  ai_models:
