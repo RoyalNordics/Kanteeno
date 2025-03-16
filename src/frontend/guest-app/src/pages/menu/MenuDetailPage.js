@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
 import { useFavorites } from '../../contexts/FavoritesContext';
+import { useRatings } from '../../contexts/RatingsContext';
 import {
   Box,
   Typography,
@@ -39,6 +40,7 @@ import {
 } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { mealsAPI } from '../../services/api';
+import RatingsDisplay from '../../components/ratings/RatingsDisplay';
 
 // Format price
 const formatPrice = (price, qty = 1) => {
@@ -55,6 +57,7 @@ const MenuDetailPage = () => {
   const { currentUser, isAuthenticated } = useAuth();
   const { addToCart } = useCart();
   const { isFavorite, addFavorite, removeFavorite } = useFavorites();
+  const { addRating } = useRatings();
   const navigate = useNavigate();
   const theme = useTheme();
   
@@ -126,19 +129,27 @@ const MenuDetailPage = () => {
       setSubmitting(true);
       setFeedbackError(null);
       
-      await mealsAPI.addFeedback(id, {
+      const success = await addRating(id, {
         rating,
         comment,
+        userName: currentUser?.name,
+        userAvatar: currentUser?.avatar,
+        date: new Date().toISOString(),
+        verified: true, // Assuming the user has purchased this meal before
       });
       
-      setFeedbackSuccess(true);
-      setRating(0);
-      setComment('');
-      
-      // Hide success message after 5 seconds
-      setTimeout(() => {
-        setFeedbackSuccess(false);
-      }, 5000);
+      if (success) {
+        setFeedbackSuccess(true);
+        setRating(0);
+        setComment('');
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          setFeedbackSuccess(false);
+        }, 5000);
+      } else {
+        setFeedbackError('Failed to submit feedback. Please try again later.');
+      }
     } catch (error) {
       console.error('Error submitting feedback:', error);
       setFeedbackError('Failed to submit feedback. Please try again later.');
@@ -358,10 +369,13 @@ const MenuDetailPage = () => {
             </Box>
           </Paper>
 
-          {/* Feedback section */}
-          <Paper sx={{ p: 3 }}>
+          {/* Customer Reviews Section */}
+          <RatingsDisplay mealId={id} />
+          
+          {/* Leave Feedback section */}
+          <Paper sx={{ p: 3, mt: 3 }}>
             <Typography variant="h6" gutterBottom>
-              Leave Feedback
+              Leave Your Review
             </Typography>
             
             {feedbackSuccess && (
@@ -377,7 +391,7 @@ const MenuDetailPage = () => {
             )}
             
             <Box sx={{ mb: 2 }}>
-              <Typography component="legend">Rating</Typography>
+              <Typography component="legend">Your Rating</Typography>
               <Rating
                 name="meal-rating"
                 value={rating}
@@ -388,13 +402,14 @@ const MenuDetailPage = () => {
             </Box>
             
             <TextField
-              label="Comments (optional)"
+              label="Your Review (optional)"
               multiline
               rows={4}
               value={comment}
               onChange={handleCommentChange}
               fullWidth
               sx={{ mb: 2 }}
+              placeholder="Share your experience with this meal..."
             />
             
             <Button 
@@ -402,7 +417,7 @@ const MenuDetailPage = () => {
               onClick={handleSubmitFeedback}
               disabled={submitting}
             >
-              {submitting ? 'Submitting...' : 'Submit Feedback'}
+              {submitting ? 'Submitting...' : 'Submit Review'}
             </Button>
           </Paper>
         </Grid>

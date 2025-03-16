@@ -6,6 +6,7 @@ import { CartProvider } from './contexts/CartContext';
 import { FavoritesProvider } from './contexts/FavoritesContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { RecommendationsProvider } from './contexts/RecommendationsContext';
+import { RatingsProvider } from './contexts/RatingsContext';
 
 // Layouts
 import MainLayout from './components/layouts/MainLayout';
@@ -47,9 +48,10 @@ function App() {
       <CartProvider>
         <FavoritesProvider>
           <RecommendationsProvider>
-            <ThemeProvider>
-              <CssBaseline />
-              <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <RatingsProvider>
+              <ThemeProvider>
+                <CssBaseline />
+                <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
                 <Routes>
                   {/* Auth routes */}
                   <Route element={<AuthLayout />}>
@@ -99,8 +101,9 @@ function App() {
                     <Route path="*" element={<NotFoundPage />} />
                   </Route>
                 </Routes>
-              </Box>
-            </ThemeProvider>
+                </Box>
+              </ThemeProvider>
+            </RatingsProvider>
           </RecommendationsProvider>
         </FavoritesProvider>
       </CartProvider>

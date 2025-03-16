@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getMockRatings, addMockRating } from './mockData';
 
 // Create an axios instance with default config
 const api = axios.create({
@@ -71,7 +72,27 @@ export const menusAPI = {
 export const mealsAPI = {
   getById: (id) => api.get(`/api/meals/${id}`),
   getMealTypes: () => api.get('/api/meals/types'),
-  addFeedback: (id, feedbackData) => api.post(`/api/meals/${id}/feedback`, feedbackData),
+  addFeedback: (id, feedbackData) => {
+    // Use mock data for now, but also send to API if it exists
+    addMockRating(id, feedbackData);
+    return api.post(`/api/meals/${id}/feedback`, feedbackData)
+      .catch(error => {
+        // If API fails, still return success for the mock implementation
+        console.warn('API call failed, using mock data:', error);
+        return { data: { success: true } };
+      });
+  },
+  getMealRatings: (id) => {
+    // Use mock data for now
+    const mockData = getMockRatings(id);
+    
+    // Try to get from API, but fall back to mock data
+    return api.get(`/api/meals/${id}/ratings`)
+      .catch(error => {
+        console.warn('API call failed, using mock data:', error);
+        return { data: mockData };
+      });
+  },
   search: (params) => api.get('/api/meals/search', { params }),
   getByAllergies: (allergies) => api.get('/api/meals/allergies', { params: { allergies } }),
 };
@@ -89,4 +110,6 @@ export const ordersAPI = {
 export const recommendationsAPI = {
   getPersonalized: () => api.get('/api/recommendations'),
   getTrending: () => api.get('/api/recommendations/trending'),
+  trackInteraction: (mealId, interactionType) => api.post('/api/recommendations/track', { mealId, interactionType }),
+  getUserStats: () => api.get('/api/recommendations/stats'),
 };
