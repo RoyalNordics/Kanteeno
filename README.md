@@ -1,162 +1,124 @@
-# Kanteeno
+# Kanteeno - Modulært Madservice System
 
-Kanteeno is a comprehensive digital platform designed to optimize canteen operations and food management through marketplace integration, automated menu planning, sustainability reporting, and data analytics.
+Kanteeno er et omfattende madservice-system designet til at håndtere alle aspekter af madlevering, fra menuadministration og ordrehåndtering til leverandørstyring og forecasting.
 
-## Overview
+## Modulær Struktur
 
-Kanteeno helps canteens reduce food waste, improve meal planning, and make operations more efficient through a suite of integrated tools and services. The platform serves three main user groups:
+Kanteeno er opbygget med en modulær arkitektur, hvor hvert modul har et specifikt ansvarsområde og kan udvikles, testes og implementeres uafhængigt. Denne struktur gør systemet mere vedligeholdelsesvenligt, skalerbart og fleksibelt.
 
-1. **Canteens** - Optimize purchasing, reduce food waste, and improve menu management
-2. **Suppliers** - Digital marketplace to offer products directly to canteens
-3. **Guests** - Pre-order meals and set preferences
+### Kernekomponenter
 
-## Key Features
+- **Brugerstyring & Roller**: Håndterer brugeradministration, autentificering og adgangskontrol.
+- **Menu & Måltider**: Håndterer oprettelse og administration af menuer og måltider.
+- **Ordrehåndtering**: Håndterer bestilling, betaling og levering af måltider.
+- **Leverandørstyring**: Håndterer leverandører, kontrakter og indkøb.
+- **Rapportering & Analytics**: Håndterer rapportering, dataanalyse og visualisering.
 
-### Supplier Marketplace
-- Supplier registration and product management
-- Pricing and kickback management
-- Sales analytics dashboard
+### AI-komponenter
 
-### User Management
-- Role-based access control (Admin, Manager, Chef, User)
-- Customizable permissions
-- Activity logging
+- **Forecasting & AI**: Håndterer forudsigelse af efterspørgsel, anbefalinger og optimering.
 
-### Customer Management
-- Business unit management for multi-location canteens
-- Meal preferences and nutritional data tracking
-- User profiles and preferences
+### Frontend-komponenter
 
-### Sustainability & Food Optimization
-- Sustainability dashboard showing CO2 footprint, food waste, and ingredient usage
-- Supplier sustainability contribution monitoring
-- AI-based forecasting to minimize food waste
-- Canteen comparison for optimization opportunities
+- **Frontend Admin Portal**: Administrationsportal til styring af systemet.
+- **Frontend Guest App**: Brugervendt app til bestilling af måltider.
 
-### Compliance & KPIs
-- Compliance scoring for sustainability, food quality, and costs
-- KPI reporting for key metrics
-- Performance-based bonus models
+## Dokumentation
 
-### Automated Menu Planning
-- AI-generated weekly menus based on user preferences and ingredient prices
-- Supplier integration for price updates
-- Guest app for meal planning
+Hvert modul har sin egen dokumentation, der beskriver modulets formål, funktionalitet, krav, API-endpoints, forbindelser til andre moduler, forventninger, fremtidige udvidelser og design overvejelser.
 
-### Order & Delivery Management
-- Delivery status monitoring
-- Complaint handling
-- AI-based daily summaries
+- **Modulbibler**: Detaljeret dokumentation for hvert modul findes i `docs/modules/`.
+- **Status-dokumenter**: Status for hvert modul findes i `docs/status/`.
+- **Diagrammer**: Diagrammer og visuelle repræsentationer af systemet findes i `docs/charts/`.
 
-## Technical Architecture
+## Teknisk Arkitektur
 
-Kanteeno is built using a modern tech stack:
+Kanteeno er bygget med moderne teknologier og følger best practices for softwareudvikling:
 
-### Backend
-- Node.js with Express
-- MongoDB for data storage
-- JWT authentication
-- RESTful API design
+- **Backend**: Node.js, Express, MongoDB
+- **Frontend**: React
+- **AI**: Python, TensorFlow/PyTorch
+- **Containerization**: Docker, Docker Compose
 
-### Frontend
-- Admin Portal: React with Material UI
-- Guest App: React with Material UI (mobile-optimized)
+Se det komplette arkitekturdiagram i `docs/charts/technical-architecture.md`.
 
-### AI & Machine Learning
-- Python-based forecasting models
-- TensorFlow for advanced predictions
-- Data analytics for waste reduction and menu optimization
+## Kom i gang
 
-### Integration
-- API integrations with supplier systems
-- Data export in CSV/PDF formats
-- Cloud-based hosting with real-time updates
+### Forudsætninger
 
-## Getting Started
-
-### Prerequisites
-- Node.js (v16+)
-- MongoDB
-- Python 3.8+ (for AI components)
-- npm or yarn
+- Docker og Docker Compose
+- Node.js (v14 eller nyere)
+- MongoDB (v4.4 eller nyere)
+- Python (v3.8 eller nyere) for AI-komponenter
 
 ### Installation
 
-1. Clone the repository
-```
-git clone https://github.com/your-org/kanteeno.git
-cd kanteeno
-```
+1. Klon repositoriet:
+   ```
+   git clone https://github.com/yourusername/kanteeno.git
+   cd kanteeno
+   ```
 
-2. Install backend dependencies
-```
-cd src/backend
-npm install
-```
+2. Opret en `.env`-fil baseret på `.env.example`:
+   ```
+   cp .env.example .env
+   ```
 
-3. Install frontend dependencies
-```
-cd src/frontend/admin-portal
-npm install
+3. Rediger `.env`-filen med dine egne værdier.
 
-cd ../guest-app
-npm install
-```
+### Kør systemet
 
-4. Set up environment variables
-```
-cp src/backend/.env.example src/backend/.env
-# Edit .env file with your configuration
-```
-
-5. Install AI dependencies
-```
-cd src/ai/forecasting
-pip install -r requirements.txt
-```
-
-### Running the Application
-
-1. Start the backend server
-```
-cd src/backend
-npm run dev
-```
-
-2. Start the admin portal
-```
-cd src/frontend/admin-portal
-npm start
-```
-
-3. Start the guest app
-```
-cd src/frontend/guest-app
-npm start
-```
-
-## Project Structure
+#### Kør hele systemet
 
 ```
-kanteeno/
-├── src/
-│   ├── backend/             # Node.js backend
-│   │   ├── api/             # API routes and controllers
-│   │   ├── config/          # Configuration files
-│   │   ├── models/          # MongoDB models
-│   │   └── utils/           # Utility functions
-│   ├── frontend/
-│   │   ├── admin-portal/    # React admin interface
-│   │   └── guest-app/       # React guest application
-│   └── ai/
-│       └── forecasting/     # Python ML models for forecasting
-└── docs/                    # Documentation
+docker-compose up
 ```
 
-## License
+#### Kør med modulær struktur
 
-This project is proprietary and confidential.
+```
+docker-compose -f docker-compose.modular.yml up
+```
 
-## Contact
+#### Kør specifikke moduler
 
-For more information, please contact [your-email@example.com](mailto:your-email@example.com).
+```
+docker-compose -f docker-compose.modular.yml up mongodb user-management-backend menu-management-backend
+```
+
+### Opdater status-dokumenter
+
+Kør følgende kommando for at opdatere status-dokumenterne for alle moduler:
+
+```
+node scripts/update-status.js
+```
+
+Eller for et specifikt modul:
+
+```
+node scripts/update-status.js user-management
+```
+
+## Udvikling
+
+### Modulær udvikling
+
+Når du udvikler på et specifikt modul, kan du køre kun det modul og dets afhængigheder:
+
+```
+docker-compose -f docker-compose.modular.yml up mongodb user-management-backend
+```
+
+### Tilføj et nyt modul
+
+1. Opret en ny mappe i `docs/modules/` med modulets dokumentation.
+2. Opret et status-dokument i `docs/status/`.
+3. Implementer modulets backend-komponenter i `src/backend/`.
+4. Implementer modulets frontend-komponenter i `src/frontend/`.
+5. Opdater `docker-compose.modular.yml` med det nye modul.
+6. Opdater moduloversigtsdiagrammet i `docs/charts/module-overview.md`.
+
+## Licens
+
+Dette projekt er licenseret under MIT-licensen - se [LICENSE](LICENSE) filen for detaljer.

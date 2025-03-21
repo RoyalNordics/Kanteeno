@@ -1,0 +1,255 @@
+version: '3.8'
+
+# Modulær Docker Compose konfiguration for Kanteeno
+# Denne fil er struktureret efter moduler, så hvert modul kan bygges og køres uafhængigt
+
+services:
+  # Database (fælles for alle moduler)
+  mongodb:
+    image: mongo:6.0
+    container_name: kanteeno-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    networks:
+      - kanteeno-network
+
+  # Modul: Brugerstyring & Roller
+  # Backend-komponenter
+  user-management-backend:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    container_name: kanteeno-user-management
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/kanteeno?authSource=admin
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRE=30d
+      - MODULE=user-management
+    volumes:
+      - ./src/backend:/app
+      - /app/node_modules
+    networks:
+      - kanteeno-network
+
+  # Modul: Menu & Måltider
+  # Backend-komponenter
+  menu-management-backend:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    container_name: kanteeno-menu-management
+    restart: always
+    ports:
+      - "5010:5010"
+    depends_on:
+      - mongodb
+      - user-management-backend
+    environment:
+      - NODE_ENV=production
+      - PORT=5010
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/kanteeno?authSource=admin
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRE=30d
+      - MODULE=menu-management
+    volumes:
+      - ./src/backend:/app
+      - /app/node_modules
+    networks:
+      - kanteeno-network
+
+  # Modul: Ordrehåndtering
+  # Backend-komponenter
+  order-management-backend:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    container_name: kanteeno-order-management
+    restart: always
+    ports:
+      - "5020:5020"
+    depends_on:
+      - mongodb
+      - user-management-backend
+      - menu-management-backend
+    environment:
+      - NODE_ENV=production
+      - PORT=5020
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/kanteeno?authSource=admin
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRE=30d
+      - MODULE=order-management
+    volumes:
+      - ./src/backend:/app
+      - /app/node_modules
+    networks:
+      - kanteeno-network
+
+  # Modul: Leverandørstyring
+  # Backend-komponenter
+  supplier-management-backend:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    container_name: kanteeno-supplier-management
+    restart: always
+    ports:
+      - "5030:5030"
+    depends_on:
+      - mongodb
+      - user-management-backend
+    environment:
+      - NODE_ENV=production
+      - PORT=5030
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/kanteeno?authSource=admin
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRE=30d
+      - MODULE=supplier-management
+    volumes:
+      - ./src/backend:/app
+      - /app/node_modules
+    networks:
+      - kanteeno-network
+
+  # Modul: Rapportering & Analytics
+  # Backend-komponenter
+  reporting-analytics-backend:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    container_name: kanteeno-reporting-analytics
+    restart: always
+    ports:
+      - "5040:5040"
+    depends_on:
+      - mongodb
+      - user-management-backend
+    environment:
+      - NODE_ENV=production
+      - PORT=5040
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/kanteeno?authSource=admin
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRE=30d
+      - MODULE=reporting-analytics
+    volumes:
+      - ./src/backend:/app
+      - /app/node_modules
+    networks:
+      - kanteeno-network
+
+  # Modul: Forecasting & AI
+  # AI-komponenter
+  forecasting-ai:
+    build:
+      context: ./src/ai/forecasting
+      dockerfile: Dockerfile
+    container_name: kanteeno-ai-forecasting
+    restart: always
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongodb
+      - user-management-backend
+    environment:
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/kanteeno?authSource=admin
+      - API_URL=http://user-management-backend:5000
+    volumes:
+      - ./src/ai/forecasting:/app
+      - ai_models:/app/models
+    networks:
+      - kanteeno-network
+      
+  recommendation-ai:
+    build:
+      context: ./src/ai/recommendation
+      dockerfile: Dockerfile
+    container_name: kanteeno-ai-recommendation
+    restart: always
+    ports:
+      - "5002:5001"
+    depends_on:
+      - mongodb
+      - user-management-backend
+    environment:
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/kanteeno?authSource=admin
+      - API_URL=http://user-management-backend:5000
+    volumes:
+      - ./src/ai/recommendation:/app
+      - ai_recommendation_data:/app/data
+    networks:
+      - kanteeno-network
+      
+  menu-generation-ai:
+    build:
+      context: ./src/ai/menu-generation
+      dockerfile: Dockerfile
+    container_name: kanteeno-ai-menu-generation
+    restart: always
+    ports:
+      - "5003:5002"
+    depends_on:
+      - mongodb
+      - user-management-backend
+    environment:
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/kanteeno?authSource=admin
+      - API_URL=http://user-management-backend:5000
+    volumes:
+      - ./src/ai/menu-generation:/app
+      - ai_menu_generation_data:/app/data
+    networks:
+      - kanteeno-network
+
+  # Frontend-komponenter
+  admin-portal:
+    build:
+      context: ./src/frontend/admin-portal
+      dockerfile: Dockerfile
+    container_name: kanteeno-admin
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - user-management-backend
+      - menu-management-backend
+      - order-management-backend
+      - supplier-management-backend
+      - reporting-analytics-backend
+    networks:
+      - kanteeno-network
+
+  guest-app:
+    build:
+      context: ./src/frontend/guest-app
+      dockerfile: Dockerfile
+    container_name: kanteeno-guest
+    restart: always
+    ports:
+      - "3001:80"
+    depends_on:
+      - user-management-backend
+      - menu-management-backend
+      - order-management-backend
+    networks:
+      - kanteeno-network
+
+networks:
+  kanteeno-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  ai_models:
+  ai_recommendation_data:
+  ai_menu_generation_data:
