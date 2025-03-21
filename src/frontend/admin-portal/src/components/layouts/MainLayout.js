@@ -32,6 +32,8 @@ import {
   Settings as SettingsIcon,
   Logout as LogoutIcon,
   AccountCircle as ProfileIcon,
+  Description as DescriptionIcon,
+  Eco as EcoIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -77,12 +79,14 @@ const MainLayout = () => {
     { text: 'Suppliers', icon: <SupplierIcon />, path: '/suppliers' },
     { text: 'Marketplace', icon: <MarketplaceIcon />, path: '/marketplace' },
     { text: 'Orders', icon: <OrderIcon />, path: '/orders' },
+    { text: 'Special Produce', icon: <EcoIcon />, path: '/special-produce' },
     { text: 'Reports', icon: <ReportIcon />, path: '/reports' },
     { text: 'Forecasts', icon: <ForecastIcon />, path: '/forecasts' },
   ];
 
   // Admin-only menu items
   const adminMenuItems = [
+    { text: 'Contracts', icon: <DescriptionIcon />, path: '/contracts' },
     { text: 'Users', icon: <UserIcon />, path: '/users' },
   ];
 
