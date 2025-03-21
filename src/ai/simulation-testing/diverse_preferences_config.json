@@ -1,0 +1,91 @@
+{
+  "portion_weight": {
+    "min": 350,
+    "max": 550
+  },
+  "price": {
+    "min": 35,
+    "max": 65
+  },
+  "organic_percentage": {
+    "min": 50,
+    "target": 75
+  },
+  "co2_footprint": {
+    "max": 4.0
+  },
+  "excluded_origins": ["Kina"],
+  "excluded_suppliers": [13],
+  "user_count": 300,
+  "output_dir": "simulation_results/diverse_preferences_scenario",
+  "dietary_preferences": {
+    "vegetarian_percentage": 20,
+    "vegan_percentage": 8,
+    "pescatarian_percentage": 5,
+    "no_fish_percentage": 15,
+    "no_shellfish_percentage": 18,
+    "no_pork_percentage": 12,
+    "no_beef_percentage": 10,
+    "no_dairy_percentage": 12,
+    "no_eggs_percentage": 8,
+    "gluten_free_percentage": 7,
+    "lactose_intolerant_percentage": 15,
+    "nut_allergy_percentage": 5,
+    "soy_allergy_percentage": 3,
+    "organic_focus_percentage": 40,
+    "low_carbon_footprint_percentage": 35
+  },
+  "allergen_distribution": {
+    "gluten": 7,
+    "mælk": 15,
+    "nødder": 5,
+    "æg": 4,
+    "soja": 3,
+    "selleri": 2,
+    "sesam": 2,
+    "skaldyr": 3,
+    "fisk": 2,
+    "sennep": 1,
+    "sulfitter": 1,
+    "lupin": 1,
+    "bløddyr": 2
+  },
+  "customer_contract": {
+    "name": "Diverse Preferences Scenario",
+    "max_price_per_meal": 60,
+    "min_organic_percentage": 60,
+    "max_co2_per_meal": 3.5,
+    "preferred_origins": ["Danmark", "Sverige", "Norge"],
+    "excluded_origins": ["Kina"],
+    "preferred_suppliers": [2, 5, 9],
+    "excluded_suppliers": [13],
+    "menu_compliance_requirements": {
+      "minimum_vegetarian_options_per_day": 2,
+      "minimum_vegan_options_per_day": 1,
+      "minimum_gluten_free_options_per_day": 1,
+      "minimum_nut_free_options_per_day": 2,
+      "minimum_dairy_free_options_per_day": 1,
+      "minimum_organic_options_per_day": 2,
+      "allergen_labeling_required": "true",
+      "co2_footprint_labeling_required": "true"
+    }
+  },
+  "supplier_discounts": {
+    "apply_volume_discounts": "true",
+    "apply_seasonal_discounts": "true",
+    "apply_contract_discounts": "true",
+    "apply_bonus_programs": "true",
+    "contract_length_months": 24,
+    "estimated_monthly_volume": {
+      "1": 40,
+      "2": 120,
+      "3": 60,
+      "4": 30,
+      "5": 100,
+      "6": 50,
+      "7": 35,
+      "8": 15,
+      "9": 80
+    }
+  }
+}

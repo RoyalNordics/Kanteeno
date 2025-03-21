@@ -63,10 +63,10 @@ DEFAULT_PARAMS = {
         "excluded_suppliers": []  # List of excluded supplier IDs
     },
     "supplier_discounts": {
-        "apply_volume_discounts": true,
-        "apply_seasonal_discounts": true,
-        "apply_contract_discounts": true,
-        "apply_bonus_programs": true,
+        "apply_volume_discounts": True,
+        "apply_seasonal_discounts": True,
+        "apply_contract_discounts": True,
+        "apply_bonus_programs": True,
         "contract_length_months": 12,  # For contract-based discounts
         "estimated_monthly_volume": {  # Estimated monthly order volume per supplier
             "1": 30,  # Supplier ID: kg
@@ -254,7 +254,7 @@ def filter_meals_by_parameters(meals: List[Dict[str, Any]], params: Dict[str, An
 
 def adjust_user_profiles(params: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Generate users with adjusted profiles based on parameters."""
-    # Adjust vegetarian percentage
+    # Import user profiles
     from simulate_user_choices import USER_PROFILES
     
     # Create a copy of the profiles to modify
@@ -263,24 +263,152 @@ def adjust_user_profiles(params: Dict[str, Any]) -> List[Dict[str, Any]]:
         profile_copy = profile.copy()
         adjusted_profiles.append(profile_copy)
     
-    # Set vegetarian percentage
-    vegetarian_count = int(params["user_count"] * (params["vegetarian_percentage"] / 100))
-    
-    # Set eco-conscious percentage
-    eco_conscious_count = int(params["user_count"] * (params["eco_conscious_percentage"] / 100))
-    
-    # Generate users with the adjusted profiles
+    # Generate users with the base profiles
     users = generate_users(params["user_count"])
     
-    # Ensure the right number of vegetarians
-    for i in range(vegetarian_count):
-        if i < len(users):
-            users[i]["dietary_preferences"]["vegetarian"] = True
+    # Check if we have the new dietary preferences structure
+    if "dietary_preferences" in params:
+        dietary_prefs = params["dietary_preferences"]
+        
+        # Apply vegetarian preference
+        if "vegetarian_percentage" in dietary_prefs:
+            vegetarian_count = int(params["user_count"] * (dietary_prefs["vegetarian_percentage"] / 100))
+            for i in range(vegetarian_count):
+                if i < len(users):
+                    users[i]["dietary_preferences"]["vegetarian"] = True
+        
+        # Apply vegan preference (subset of vegetarians)
+        if "vegan_percentage" in dietary_prefs:
+            vegan_count = int(params["user_count"] * (dietary_prefs["vegan_percentage"] / 100))
+            for i in range(vegan_count):
+                if i < len(users):
+                    if "dietary_restrictions" not in users[i]:
+                        users[i]["dietary_restrictions"] = {}
+                    users[i]["dietary_preferences"]["vegetarian"] = True  # Vegans are also vegetarians
+                    users[i]["dietary_restrictions"]["vegan"] = True
+                    users[i]["dietary_restrictions"]["no_dairy"] = True
+                    users[i]["dietary_restrictions"]["no_eggs"] = True
+        
+        # Apply pescatarian preference
+        if "pescatarian_percentage" in dietary_prefs:
+            pescatarian_count = int(params["user_count"] * (dietary_prefs["pescatarian_percentage"] / 100))
+            for i in range(vegan_count, vegan_count + pescatarian_count):
+                if i < len(users):
+                    if "dietary_restrictions" not in users[i]:
+                        users[i]["dietary_restrictions"] = {}
+                    users[i]["dietary_restrictions"]["pescatarian"] = True
+                    users[i]["dietary_restrictions"]["no_meat"] = True
+        
+        # Apply no fish preference
+        if "no_fish_percentage" in dietary_prefs:
+            no_fish_count = int(params["user_count"] * (dietary_prefs["no_fish_percentage"] / 100))
+            for i in range(vegan_count + pescatarian_count, vegan_count + pescatarian_count + no_fish_count):
+                if i < len(users):
+                    if "dietary_restrictions" not in users[i]:
+                        users[i]["dietary_restrictions"] = {}
+                    users[i]["dietary_restrictions"]["no_fish"] = True
+        
+        # Apply no shellfish preference
+        if "no_shellfish_percentage" in dietary_prefs:
+            no_shellfish_count = int(params["user_count"] * (dietary_prefs["no_shellfish_percentage"] / 100))
+            start_idx = vegan_count + pescatarian_count + no_fish_count
+            for i in range(start_idx, start_idx + no_shellfish_count):
+                if i < len(users):
+                    if "dietary_restrictions" not in users[i]:
+                        users[i]["dietary_restrictions"] = {}
+                    users[i]["dietary_restrictions"]["no_shellfish"] = True
+            start_idx += no_shellfish_count
+        
+        # Apply no pork preference
+        if "no_pork_percentage" in dietary_prefs:
+            no_pork_count = int(params["user_count"] * (dietary_prefs["no_pork_percentage"] / 100))
+            start_idx = vegan_count + pescatarian_count + no_fish_count + no_shellfish_count
+            for i in range(start_idx, start_idx + no_pork_count):
+                if i < len(users):
+                    if "dietary_restrictions" not in users[i]:
+                        users[i]["dietary_restrictions"] = {}
+                    users[i]["dietary_restrictions"]["no_pork"] = True
+            start_idx += no_pork_count
+        
+        # Apply no beef preference
+        if "no_beef_percentage" in dietary_prefs:
+            no_beef_count = int(params["user_count"] * (dietary_prefs["no_beef_percentage"] / 100))
+            start_idx = vegan_count + pescatarian_count + no_fish_count + no_shellfish_count + no_pork_count
+            for i in range(start_idx, start_idx + no_beef_count):
+                if i < len(users):
+                    if "dietary_restrictions" not in users[i]:
+                        users[i]["dietary_restrictions"] = {}
+                    users[i]["dietary_restrictions"]["no_beef"] = True
+            start_idx += no_beef_count
+        
+        # Apply no dairy preference
+        if "no_dairy_percentage" in dietary_prefs:
+            no_dairy_count = int(params["user_count"] * (dietary_prefs["no_dairy_percentage"] / 100))
+            start_idx = vegan_count + pescatarian_count + no_fish_count + no_shellfish_count + no_pork_count + no_beef_count
+            for i in range(start_idx, start_idx + no_dairy_count):
+                if i < len(users) and not users[i].get("dietary_restrictions", {}).get("vegan", False):
+                    if "dietary_restrictions" not in users[i]:
+                        users[i]["dietary_restrictions"] = {}
+                    users[i]["dietary_restrictions"]["no_dairy"] = True
+            start_idx += no_dairy_count
+        
+        # Apply no eggs preference
+        if "no_eggs_percentage" in dietary_prefs:
+            no_eggs_count = int(params["user_count"] * (dietary_prefs["no_eggs_percentage"] / 100))
+            start_idx = vegan_count + pescatarian_count + no_fish_count + no_shellfish_count + no_pork_count + no_beef_count + no_dairy_count
+            for i in range(start_idx, start_idx + no_eggs_count):
+                if i < len(users) and not users[i].get("dietary_restrictions", {}).get("vegan", False):
+                    if "dietary_restrictions" not in users[i]:
+                        users[i]["dietary_restrictions"] = {}
+                    users[i]["dietary_restrictions"]["no_eggs"] = True
+            start_idx += no_eggs_count
+        
+        # Apply organic focus preference
+        if "organic_focus_percentage" in dietary_prefs:
+            organic_focus_count = int(params["user_count"] * (dietary_prefs["organic_focus_percentage"] / 100))
+            for i in range(organic_focus_count):
+                if i < len(users):
+                    users[i]["dietary_preferences"]["organic_preference"] = max(0.7, users[i]["dietary_preferences"].get("organic_preference", 0))
+                    users[i]["dietary_preferences"]["eco_conscious"] = True
+        
+        # Apply low carbon footprint preference
+        if "low_carbon_footprint_percentage" in dietary_prefs:
+            low_carbon_count = int(params["user_count"] * (dietary_prefs["low_carbon_footprint_percentage"] / 100))
+            for i in range(low_carbon_count):
+                if i < len(users):
+                    users[i]["dietary_preferences"]["eco_conscious"] = True
+    else:
+        # Fallback to old parameters if new structure not present
+        
+        # Set vegetarian percentage
+        if "vegetarian_percentage" in params:
+            vegetarian_count = int(params["user_count"] * (params["vegetarian_percentage"] / 100))
+            for i in range(vegetarian_count):
+                if i < len(users):
+                    users[i]["dietary_preferences"]["vegetarian"] = True
+        
+        # Set eco-conscious percentage
+        if "eco_conscious_percentage" in params:
+            eco_conscious_count = int(params["user_count"] * (params["eco_conscious_percentage"] / 100))
+            for i in range(eco_conscious_count):
+                if i < len(users):
+                    users[i]["dietary_preferences"]["eco_conscious"] = True
     
-    # Ensure the right number of eco-conscious users
-    for i in range(eco_conscious_count):
-        if i < len(users):
-            users[i]["dietary_preferences"]["eco_conscious"] = True
+    # Apply allergen distribution if specified
+    if "allergen_distribution" in params:
+        allergen_dist = params["allergen_distribution"]
+        
+        # Clear existing allergies
+        for user in users:
+            user["allergies"] = []
+        
+        # Apply each allergen according to its percentage
+        for allergen, percentage in allergen_dist.items():
+            allergen_count = int(params["user_count"] * (percentage / 100))
+            # Randomly select users to have this allergen
+            allergen_users = random.sample(range(len(users)), min(allergen_count, len(users)))
+            for i in allergen_users:
+                users[i]["allergies"].append(allergen)
     
     return users
 
