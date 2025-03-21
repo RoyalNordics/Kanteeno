@@ -1,0 +1,962 @@
+{
+  "ingredients": [
+    {
+      "id": 1001,
+      "name": "Lasagneplader",
+      "category": "Pasta",
+      "nutritionalInfo": {
+        "calories": 160,
+        "protein": 5.5,
+        "carbs": 30.2,
+        "fat": 1.2,
+        "fiber": 1.8
+      },
+      "allergens": ["gluten"],
+      "isOrganic": false,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": false,
+      "isLactoseFree": true,
+      "co2Footprint": 0.8,
+      "waterFootprint": 1450,
+      "origins": [
+        {
+          "country": "Italien",
+          "region": "Emilia-Romagna",
+          "transportDistance": 1800,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 1,
+          "name": "Pasta Perfecto",
+          "pricePerUnit": 12.50,
+          "unit": "kg",
+          "minOrderQuantity": 5,
+          "sustainabilityScore": 3.5,
+          "certifications": ["ISO 9001"],
+          "discounts": [
+            {
+              "type": "volume",
+              "threshold": 20,
+              "percentage": 5
+            },
+            {
+              "type": "volume",
+              "threshold": 50,
+              "percentage": 10
+            }
+          ],
+          "bonusPrograms": [
+            {
+              "type": "loyalty",
+              "description": "2% rabat på alle køb efter 6 måneders samarbejde",
+              "percentage": 2,
+              "conditions": "Minimum 6 måneders samarbejde"
+            }
+          ]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1002,
+      "name": "Squash",
+      "category": "Grøntsager",
+      "nutritionalInfo": {
+        "calories": 17,
+        "protein": 1.2,
+        "carbs": 3.4,
+        "fat": 0.2,
+        "fiber": 1.2
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 0.2,
+      "waterFootprint": 350,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Sjælland",
+          "transportDistance": 50,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 2,
+          "name": "Økologisk Grønt",
+          "pricePerUnit": 18.00,
+          "unit": "kg",
+          "minOrderQuantity": 3,
+          "sustainabilityScore": 4.8,
+          "certifications": ["Økologisk", "Dansk IP"],
+          "discounts": [
+            {
+              "type": "seasonal",
+              "months": [7, 8, 9],
+              "percentage": 15,
+              "description": "Sæsonrabat i højsæson"
+            },
+            {
+              "type": "volume",
+              "threshold": 25,
+              "percentage": 8
+            }
+          ],
+          "bonusPrograms": [
+            {
+              "type": "sustainability",
+              "description": "3% rabat ved køb af kun økologiske varer i en måned",
+              "percentage": 3,
+              "conditions": "Kun økologiske varer i en hel måned"
+            }
+          ]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": true,
+        "peakMonths": [7, 8, 9, 10]
+      }
+    },
+    {
+      "id": 1003,
+      "name": "Aubergine",
+      "category": "Grøntsager",
+      "nutritionalInfo": {
+        "calories": 25,
+        "protein": 1.0,
+        "carbs": 6.0,
+        "fat": 0.2,
+        "fiber": 3.0
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 0.3,
+      "waterFootprint": 360,
+      "origins": [
+        {
+          "country": "Spanien",
+          "region": "Andalusien",
+          "transportDistance": 2500,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 2,
+          "name": "Økologisk Grønt",
+          "pricePerUnit": 22.00,
+          "unit": "kg",
+          "minOrderQuantity": 3,
+          "sustainabilityScore": 4.8,
+          "certifications": ["Økologisk", "EU Organic"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": true,
+        "peakMonths": [6, 7, 8, 9]
+      }
+    },
+    {
+      "id": 1004,
+      "name": "Tomat",
+      "category": "Grøntsager",
+      "nutritionalInfo": {
+        "calories": 18,
+        "protein": 0.9,
+        "carbs": 3.9,
+        "fat": 0.2,
+        "fiber": 1.2
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 0.2,
+      "waterFootprint": 215,
+      "origins": [
+        {
+          "country": "Italien",
+          "region": "Sicilien",
+          "transportDistance": 2200,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 3,
+          "name": "Sydfrugter A/S",
+          "pricePerUnit": 16.50,
+          "unit": "kg",
+          "minOrderQuantity": 5,
+          "sustainabilityScore": 3.2,
+          "certifications": ["GlobalGAP"],
+          "discounts": [
+            {
+              "type": "volume",
+              "threshold": 30,
+              "percentage": 7
+            }
+          ],
+          "bonusPrograms": [
+            {
+              "type": "early_payment",
+              "description": "1.5% rabat ved betaling inden for 10 dage",
+              "percentage": 1.5,
+              "conditions": "Betaling inden for 10 dage"
+            }
+          ]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": true,
+        "peakMonths": [6, 7, 8, 9]
+      }
+    },
+    {
+      "id": 1005,
+      "name": "Løg",
+      "category": "Grøntsager",
+      "nutritionalInfo": {
+        "calories": 40,
+        "protein": 1.1,
+        "carbs": 9.3,
+        "fat": 0.1,
+        "fiber": 1.7
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 0.1,
+      "waterFootprint": 280,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Fyn",
+          "transportDistance": 120,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 2,
+          "name": "Økologisk Grønt",
+          "pricePerUnit": 12.00,
+          "unit": "kg",
+          "minOrderQuantity": 5,
+          "sustainabilityScore": 4.8,
+          "certifications": ["Økologisk", "Dansk IP"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1006,
+      "name": "Hvidløg",
+      "category": "Krydderier",
+      "nutritionalInfo": {
+        "calories": 149,
+        "protein": 6.4,
+        "carbs": 33.1,
+        "fat": 0.5,
+        "fiber": 2.1
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 0.1,
+      "waterFootprint": 590,
+      "origins": [
+        {
+          "country": "Spanien",
+          "region": "Andalusien",
+          "transportDistance": 2500,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 3,
+          "name": "Sydfrugter A/S",
+          "pricePerUnit": 45.00,
+          "unit": "kg",
+          "minOrderQuantity": 1,
+          "sustainabilityScore": 3.2,
+          "certifications": ["GlobalGAP"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1007,
+      "name": "Mozzarella",
+      "category": "Mejeriprodukter",
+      "nutritionalInfo": {
+        "calories": 280,
+        "protein": 22.0,
+        "carbs": 2.2,
+        "fat": 22.0,
+        "fiber": 0.0
+      },
+      "allergens": ["mælk"],
+      "isOrganic": false,
+      "isVegan": false,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": false,
+      "co2Footprint": 1.2,
+      "waterFootprint": 1800,
+      "origins": [
+        {
+          "country": "Italien",
+          "region": "Campania",
+          "transportDistance": 1900,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 4,
+          "name": "Mejeri Direkte",
+          "pricePerUnit": 75.00,
+          "unit": "kg",
+          "minOrderQuantity": 2,
+          "sustainabilityScore": 4.0,
+          "certifications": ["ISO 22000"],
+          "discounts": [
+            {
+              "type": "volume",
+              "threshold": 10,
+              "percentage": 5
+            },
+            {
+              "type": "contract",
+              "description": "10% rabat ved 12 måneders kontrakt",
+              "percentage": 10,
+              "conditions": "12 måneders bindingsperiode"
+            }
+          ],
+          "bonusPrograms": [
+            {
+              "type": "referral",
+              "description": "5% rabat ved henvisning af ny kunde",
+              "percentage": 5,
+              "conditions": "Ny kunde skal bestille for min. 10.000 kr."
+            }
+          ]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1008,
+      "name": "Parmesan",
+      "category": "Mejeriprodukter",
+      "nutritionalInfo": {
+        "calories": 420,
+        "protein": 38.0,
+        "carbs": 3.2,
+        "fat": 29.0,
+        "fiber": 0.0
+      },
+      "allergens": ["mælk"],
+      "isOrganic": false,
+      "isVegan": false,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": false,
+      "co2Footprint": 1.5,
+      "waterFootprint": 2350,
+      "origins": [
+        {
+          "country": "Italien",
+          "region": "Emilia-Romagna",
+          "transportDistance": 1800,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 4,
+          "name": "Mejeri Direkte",
+          "pricePerUnit": 180.00,
+          "unit": "kg",
+          "minOrderQuantity": 1,
+          "sustainabilityScore": 4.0,
+          "certifications": ["ISO 22000", "PDO"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1009,
+      "name": "Mælk",
+      "category": "Mejeriprodukter",
+      "nutritionalInfo": {
+        "calories": 65,
+        "protein": 3.4,
+        "carbs": 4.8,
+        "fat": 3.6,
+        "fiber": 0.0
+      },
+      "allergens": ["mælk"],
+      "isOrganic": true,
+      "isVegan": false,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": false,
+      "co2Footprint": 0.9,
+      "waterFootprint": 1050,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Jylland",
+          "transportDistance": 150,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 5,
+          "name": "Økologisk Mejeri",
+          "pricePerUnit": 9.50,
+          "unit": "liter",
+          "minOrderQuantity": 10,
+          "sustainabilityScore": 4.5,
+          "certifications": ["Økologisk", "Dansk IP"],
+          "discounts": [
+            {
+              "type": "volume",
+              "threshold": 50,
+              "percentage": 8
+            },
+            {
+              "type": "regular",
+              "description": "3% rabat ved fast ugentlig levering",
+              "percentage": 3,
+              "conditions": "Fast ugentlig levering"
+            }
+          ],
+          "bonusPrograms": [
+            {
+              "type": "annual",
+              "description": "5% årsbonus ved køb over 100.000 kr.",
+              "percentage": 5,
+              "conditions": "Årligt køb over 100.000 kr."
+            }
+          ]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1010,
+      "name": "Smør",
+      "category": "Mejeriprodukter",
+      "nutritionalInfo": {
+        "calories": 717,
+        "protein": 0.9,
+        "carbs": 0.1,
+        "fat": 81.0,
+        "fiber": 0.0
+      },
+      "allergens": ["mælk"],
+      "isOrganic": true,
+      "isVegan": false,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": false,
+      "co2Footprint": 0.8,
+      "waterFootprint": 5550,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Jylland",
+          "transportDistance": 150,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 5,
+          "name": "Økologisk Mejeri",
+          "pricePerUnit": 85.00,
+          "unit": "kg",
+          "minOrderQuantity": 2,
+          "sustainabilityScore": 4.5,
+          "certifications": ["Økologisk", "Dansk IP"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1011,
+      "name": "Hvedemel",
+      "category": "Tørvarer",
+      "nutritionalInfo": {
+        "calories": 364,
+        "protein": 10.3,
+        "carbs": 76.3,
+        "fat": 1.0,
+        "fiber": 2.7
+      },
+      "allergens": ["gluten"],
+      "isOrganic": false,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": false,
+      "isLactoseFree": true,
+      "co2Footprint": 0.2,
+      "waterFootprint": 1850,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Sjælland",
+          "transportDistance": 80,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 6,
+          "name": "Bageren",
+          "pricePerUnit": 8.50,
+          "unit": "kg",
+          "minOrderQuantity": 5,
+          "sustainabilityScore": 3.8,
+          "certifications": ["ISO 9001"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1012,
+      "name": "Kikærter",
+      "category": "Bælgfrugter",
+      "nutritionalInfo": {
+        "calories": 364,
+        "protein": 19.0,
+        "carbs": 61.0,
+        "fat": 6.0,
+        "fiber": 17.0
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 0.7,
+      "waterFootprint": 4200,
+      "origins": [
+        {
+          "country": "Tyrkiet",
+          "region": "Anatolien",
+          "transportDistance": 2800,
+          "transportMethod": "ship"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 7,
+          "name": "Bønner & Korn",
+          "pricePerUnit": 22.00,
+          "unit": "kg",
+          "minOrderQuantity": 5,
+          "sustainabilityScore": 4.2,
+          "certifications": ["Økologisk", "Fairtrade"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1013,
+      "name": "Persille",
+      "category": "Krydderurter",
+      "nutritionalInfo": {
+        "calories": 36,
+        "protein": 3.0,
+        "carbs": 6.3,
+        "fat": 0.8,
+        "fiber": 3.3
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 0.1,
+      "waterFootprint": 280,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Fyn",
+          "transportDistance": 120,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 2,
+          "name": "Økologisk Grønt",
+          "pricePerUnit": 80.00,
+          "unit": "kg",
+          "minOrderQuantity": 0.5,
+          "sustainabilityScore": 4.8,
+          "certifications": ["Økologisk", "Dansk IP"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": true,
+        "peakMonths": [5, 6, 7, 8, 9]
+      }
+    },
+    {
+      "id": 1014,
+      "name": "Koriander",
+      "category": "Krydderurter",
+      "nutritionalInfo": {
+        "calories": 23,
+        "protein": 2.1,
+        "carbs": 3.7,
+        "fat": 0.5,
+        "fiber": 2.8
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 0.1,
+      "waterFootprint": 270,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Fyn",
+          "transportDistance": 120,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 2,
+          "name": "Økologisk Grønt",
+          "pricePerUnit": 90.00,
+          "unit": "kg",
+          "minOrderQuantity": 0.5,
+          "sustainabilityScore": 4.8,
+          "certifications": ["Økologisk", "Dansk IP"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": true,
+        "peakMonths": [5, 6, 7, 8, 9]
+      }
+    },
+    {
+      "id": 1015,
+      "name": "Spidskommen",
+      "category": "Krydderier",
+      "nutritionalInfo": {
+        "calories": 375,
+        "protein": 17.8,
+        "carbs": 44.2,
+        "fat": 22.3,
+        "fiber": 10.5
+      },
+      "allergens": [],
+      "isOrganic": false,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 0.1,
+      "waterFootprint": 5400,
+      "origins": [
+        {
+          "country": "Indien",
+          "region": "Gujarat",
+          "transportDistance": 7500,
+          "transportMethod": "ship"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 8,
+          "name": "Krydderier & Nødder",
+          "pricePerUnit": 120.00,
+          "unit": "kg",
+          "minOrderQuantity": 0.5,
+          "sustainabilityScore": 3.0,
+          "certifications": ["ISO 9001"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1016,
+      "name": "Økologisk oksekød",
+      "category": "Kød",
+      "nutritionalInfo": {
+        "calories": 250,
+        "protein": 26.0,
+        "carbs": 0.0,
+        "fat": 17.0,
+        "fiber": 0.0
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": false,
+      "isVegetarian": false,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 3.6,
+      "waterFootprint": 15400,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Jylland",
+          "transportDistance": 180,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 9,
+          "name": "Økologisk Kød",
+          "pricePerUnit": 120.00,
+          "unit": "kg",
+          "minOrderQuantity": 5,
+          "sustainabilityScore": 4.3,
+          "certifications": ["Økologisk", "Dansk IP", "Dyrevelfærd"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1017,
+      "name": "Økologisk kyllingebryst",
+      "category": "Kød",
+      "nutritionalInfo": {
+        "calories": 165,
+        "protein": 31.0,
+        "carbs": 0.0,
+        "fat": 3.6,
+        "fiber": 0.0
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": false,
+      "isVegetarian": false,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 1.8,
+      "waterFootprint": 4325,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Sjælland",
+          "transportDistance": 90,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 9,
+          "name": "Økologisk Kød",
+          "pricePerUnit": 95.00,
+          "unit": "kg",
+          "minOrderQuantity": 5,
+          "sustainabilityScore": 4.3,
+          "certifications": ["Økologisk", "Dansk IP", "Dyrevelfærd"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1018,
+      "name": "Kyllingebryst",
+      "category": "Kød",
+      "nutritionalInfo": {
+        "calories": 165,
+        "protein": 31.0,
+        "carbs": 0.0,
+        "fat": 3.6,
+        "fiber": 0.0
+      },
+      "allergens": [],
+      "isOrganic": false,
+      "isVegan": false,
+      "isVegetarian": false,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 1.2,
+      "waterFootprint": 4325,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Jylland",
+          "transportDistance": 180,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 12,
+          "name": "Kødgrossisten",
+          "pricePerUnit": 65.00,
+          "unit": "kg",
+          "minOrderQuantity": 10,
+          "sustainabilityScore": 2.8,
+          "certifications": ["ISO 22000"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1019,
+      "name": "Quinoa",
+      "category": "Korn",
+      "nutritionalInfo": {
+        "calories": 368,
+        "protein": 14.1,
+        "carbs": 64.2,
+        "fat": 6.1,
+        "fiber": 7.0
+      },
+      "allergens": [],
+      "isOrganic": true,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": true,
+      "isLactoseFree": true,
+      "co2Footprint": 0.6,
+      "waterFootprint": 2750,
+      "origins": [
+        {
+          "country": "Peru",
+          "region": "Anderne",
+          "transportDistance": 10500,
+          "transportMethod": "ship"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 7,
+          "name": "Bønner & Korn",
+          "pricePerUnit": 45.00,
+          "unit": "kg",
+          "minOrderQuantity": 3,
+          "sustainabilityScore": 4.2,
+          "certifications": ["Økologisk", "Fairtrade"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    },
+    {
+      "id": 1020,
+      "name": "Fuldkornstortilla",
+      "category": "Brød",
+      "nutritionalInfo": {
+        "calories": 280,
+        "protein": 8.0,
+        "carbs": 48.0,
+        "fat": 6.0,
+        "fiber": 7.0
+      },
+      "allergens": ["gluten"],
+      "isOrganic": false,
+      "isVegan": true,
+      "isVegetarian": true,
+      "isGlutenFree": false,
+      "isLactoseFree": true,
+      "co2Footprint": 0.6,
+      "waterFootprint": 1850,
+      "origins": [
+        {
+          "country": "Danmark",
+          "region": "Sjælland",
+          "transportDistance": 80,
+          "transportMethod": "truck"
+        }
+      ],
+      "suppliers": [
+        {
+          "id": 6,
+          "name": "Bageren",
+          "pricePerUnit": 25.00,
+          "unit": "kg",
+          "minOrderQuantity": 5,
+          "sustainabilityScore": 3.8,
+          "certifications": ["ISO 9001"]
+        }
+      ],
+      "seasonality": {
+        "isSeasonalProduct": false,
+        "peakMonths": []
+      }
+    }
+  ]
+}

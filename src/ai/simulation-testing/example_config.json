@@ -1,0 +1,173 @@
+{
+  "portion_weight": {
+    "min": 350,
+    "max": 550
+  },
+  "price": {
+    "min": 35,
+    "max": 65
+  },
+  "organic_percentage": {
+    "min": 50,
+    "target": 75
+  },
+  "co2_footprint": {
+    "max": 4.0
+  },
+  "excluded_origins": ["Kina"],
+  "excluded_suppliers": [13],
+  "user_count": 300,
+  "vegetarian_percentage": 20,
+  "eco_conscious_percentage": 40,
+  "output_dir": "simulation_results/eco_friendly_scenario",
+  "customer_contract": {
+    "name": "Danske Bank",
+    "contractNumber": "DB-2025-001",
+    "contractType": "premium",
+    "status": "active",
+    "startDate": "2025-01-01",
+    "endDate": "2026-12-31",
+    "businessUnits": [
+      {
+        "businessUnitId": "60a2b4e8f125e13b5c8b4567",
+        "specificRequirements": {
+          "organicPercentageTarget": 60,
+          "wasteReductionTarget": 30,
+          "co2ReductionTarget": 25,
+          "budgetPerMeal": 60,
+          "mealTypes": {
+            "breakfast": false,
+            "lunch": true,
+            "dinner": false,
+            "snack": true
+          },
+          "operatingDays": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": true,
+            "thursday": true,
+            "friday": true,
+            "saturday": false,
+            "sunday": false
+          },
+          "specialRequirements": "Minimum 2 vegetariske retter hver dag. Allergeninformation skal være tydeligt angivet."
+        }
+      }
+    ],
+    "financialRequirements": {
+      "basePricePerMeal": {
+        "amount": 55,
+        "currency": "DKK"
+      },
+      "pricingTiers": [
+        {
+          "name": "Standard",
+          "threshold": 0,
+          "pricePerMeal": 55
+        },
+        {
+          "name": "Volume Discount 1",
+          "threshold": 100,
+          "pricePerMeal": 52
+        },
+        {
+          "name": "Volume Discount 2",
+          "threshold": 200,
+          "pricePerMeal": 48
+        }
+      ],
+      "invoicingFrequency": "monthly",
+      "paymentTerms": "net30",
+      "budgetCap": {
+        "amount": 1500000,
+        "currency": "DKK",
+        "period": "annually"
+      }
+    },
+    "sustainabilityRequirements": {
+      "organicCertificationLevel": "silver",
+      "organicPercentageTarget": 60,
+      "wasteReductionTarget": 30,
+      "co2ReductionTarget": 25,
+      "reportingRequirements": {
+        "frequency": "monthly",
+        "includeMetrics": {
+          "foodWaste": true,
+          "co2Footprint": true,
+          "organicPercentage": true,
+          "costEfficiency": true
+        }
+      },
+      "compliancePenalties": {
+        "applyPenalties": true,
+        "penaltyAmount": 10000,
+        "currency": "DKK"
+      }
+    },
+    "approvedSuppliers": [
+      {
+        "supplierId": 2,
+        "preferenceLevel": "preferred"
+      },
+      {
+        "supplierId": 5,
+        "preferenceLevel": "preferred"
+      },
+      {
+        "supplierId": 9,
+        "preferenceLevel": "preferred"
+      },
+      {
+        "supplierId": 1,
+        "preferenceLevel": "approved"
+      },
+      {
+        "supplierId": 3,
+        "preferenceLevel": "approved"
+      },
+      {
+        "supplierId": 4,
+        "preferenceLevel": "approved"
+      },
+      {
+        "supplierId": 6,
+        "preferenceLevel": "approved"
+      },
+      {
+        "supplierId": 7,
+        "preferenceLevel": "approved"
+      },
+      {
+        "supplierId": 8,
+        "preferenceLevel": "approved"
+      },
+      {
+        "supplierId": 13,
+        "preferenceLevel": "restricted"
+      }
+    ],
+    "preferred_origins": ["Danmark", "Sverige", "Norge"],
+    "excluded_origins": ["Kina"],
+    "max_price_per_meal": 60,
+    "min_organic_percentage": 60,
+    "max_co2_per_meal": 3.5
+  },
+  "supplier_discounts": {
+    "apply_volume_discounts": true,
+    "apply_seasonal_discounts": true,
+    "apply_contract_discounts": true,
+    "apply_bonus_programs": true,
+    "contract_length_months": 24,
+    "estimated_monthly_volume": {
+      "1": 40,
+      "2": 120,
+      "3": 60,
+      "4": 30,
+      "5": 100,
+      "6": 50,
+      "7": 35,
+      "8": 15,
+      "9": 80
+    }
+  }
+}
